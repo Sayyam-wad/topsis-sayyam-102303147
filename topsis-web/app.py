@@ -1,0 +1,59 @@
+from flask import Flask, render_template, request
+import os
+import smtplib
+from email.message import EmailMessage
+
+from topsis import topsis_web
+
+app = Flask(__name__)
+
+UPLOAD_FOLDER = "uploads"
+OUTPUT_FOLDER = "outputs"
+
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+os.makedirs(OUTPUT_FOLDER, exist_ok=True)
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/submit", methods=["POST"])
+def submit():
+    file = request.files["file"]
+    weights = request.form["weights"]
+    impacts = request.form["impacts"]
+    email = request.form["email"]
+
+    input_path = os.path.join(UPLOAD_FOLDER, file.filename)
+    output_path = os.path.join(OUTPUT_FOLDER, "output.csv")
+
+    file.save(input_path)
+
+    topsis_web(input_path, weights, impacts, output_path)
+
+    return "TOPSIS file generated successfully!"
+
+def send_email(receiver_email, file_path):
+    sender_email = "your_email@gmail.com"
+    sender_password = "your_app_password"
+
+    msg = EmailMessage()
+    msg["Subject"] = "TOPSIS Result"
+    msg["From"] = sender_email
+    msg["To"] = receiver_email
+    msg.set_content("Please find attached the TOPSIS result file.")
+
+    with open(file_path, "rb") as f:
+        msg.add_attachment(
+            f.read(),
+            maintype="application",
+            subtype="octet-stream",
+            filename="output.csv"
+        )
+
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        server.login(sender_email, sender_password)
+        server.send_message(msg)
+
+if __name__ == "__main__":
+    app.run(debug=True)
