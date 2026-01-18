@@ -26,9 +26,16 @@ An alternative with the **highest TOPSIS score** is considered the best choice.
 - Simple and reproducible workflow  
 
 ---
+## User Manual
+
+### Installation
+
+pip install topsis-sayyam-102303147
 
 ## Usage
 
 ### Command Format
 ```bash
+ 
+
 python topsis.py <InputDataFile> <Weights> <Impacts> <OutputResultFile>
