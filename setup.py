@@ -1,31 +1,31 @@
-from distutils.core import setup
+from setuptools import setup
+
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
+
 setup(
-  name = 'topsis-sayyam-102303147',         # How you named your package folder (MyLib)
-  packages = ['topsis-sayyam-102303147'],   # Chose the same as "name"
-  version = '0.1',      # Start with a small number and increase it with every change you make
-  license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
-  description = 'topsis is a lightweight Python package that implements the TOPSIS (Technique for Order Preference by Similarity to Ideal Solution) method for multicriteria decision making.
-
-It provides a command line interface to rank alternatives based on weighted criteria and positive or negative impacts, making it suitable for decision analysis tasks in engineering, management, and data science.
-
-The package supports CSV based input, robust input validation, and generates clear output with TOPSIS scores and rankings, enabling reproducible and practical decision-making workflows.',   # Give a short description about your library
-  author = 'Sayyam Wadhwa',                   # Type in your name
-  author_email = 'sayyam.wad@gmail.com',      # Type in your E-Mail
-  url = 'https://github.com/Sayyam-wad/topsis-sayyam-102303147',   # Provide either the link to your github or to your website
-  download_url = 'https://github.com/user/reponame/archive/v_01.tar.gz',    # I explain this later on
-  keywords = ['SOME', 'MEANINGFULL', 'KEYWORDS'],   # Keywords that define your package best
-  install_requires=[            # I get to this in a second
-          'validators',
-          'beautifulsoup4',
-      ],
-  classifiers=[
-    'Development Status :: 5 - Stable',      # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
-    'Intended Audience :: Developers',      # Define that your audience are developers
-    'Topic :: Software Development :: Build Tools',
-    'License :: OSI Approved :: MIT License',   # Again, pick a license
-    'Programming Language :: Python :: 3.11.8',      #Specify which pyhton versions that you want to support
-    'Programming Language :: Python :: 3.11.9',
-    'Programming Language :: Python :: 3.12.5',
-    'Programming Language :: Python :: 3.12.6',
-  ],
+    name="topsis-sayyam-102303147",
+    version="0.1.0",
+    author="Sayyam Wadhwa",
+    author_email="sayyam.wad@gmail.com",
+    description="A command-line Python package implementing the TOPSIS method for multi-criteria decision making.",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/Sayyam-wad/topsis-sayyam-102303147",
+    license="MIT",
+    py_modules=["topsis"],   # <-- your file must be named topsis.py
+    install_requires=[
+        "numpy",
+        "pandas",
+    ],
+    classifiers=[
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Education",
+        "Topic :: Scientific/Engineering :: Decision Support",
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3",
+        "Operating System :: OS Independent",
+    ],
+    python_requires=">=3.8",
 )
+
